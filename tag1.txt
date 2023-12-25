@@ -1,0 +1,5 @@
+#https://unix.stackexchange.com/questions/12132/how-to-change-temporarily-font-size-in-text-console-in-opensuse
+locate consolefonts
+setfont /usr/share/kbd/consolefonts/$font
+setfont
+
