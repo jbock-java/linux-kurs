@@ -1,1 +1,66 @@
 source .
+echo
+sleep
+ps
+top
+kill
+'python3 -m http.server --bind ... 3000'
+ssh
+scp
+git
+tar
+vim
+zip
+cd
+ll
+echo $(( 1 + 5 ))
+cat
+head
+tail
+whoami
+pwd
+mkdir
+rm
+sudo
+zypper
+grep
+find
+screen
+&
+ctrl-c
+ctr-r
+ctrl-z
+ctrl-d
+alt-.
+curl
+chmod
+chown
+. ..
+wc
+du
+df
+cut
+sort
+uniq
+shuf
+gpg
+~/.bashrc
+dos2unix
+convert
+dd
+openssl
+base64
+ssh-keygen
+tput bel
+clear
+reset
+xkbmap
+hexdump
+ifconfig
+cp
+mv
+man
+which
+$PATH
+xrandr
+
