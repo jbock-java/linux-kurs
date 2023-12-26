@@ -27,11 +27,11 @@ grep
 find
 screen
 &
-ctrl-c
-ctr-r
-ctrl-z
-ctrl-d
-alt-.
+ctrl+c
+ctrl+r
+ctrl+z
+ctrl+d
+alt+.
 curl
 chmod
 chown
@@ -46,7 +46,7 @@ shuf
 gpg
 ~/.bashrc
 dos2unix
-convert
+iconv -f ISO_8859-1 -t UTF-8 input.txt -o output.txt
 dd
 openssl
 base64
