@@ -1,5 +1,21 @@
 #https://unix.stackexchange.com/questions/12132/how-to-change-temporarily-font-size-in-text-console-in-opensuse
+sudo loadkeys us
 locate consolefonts
 setfont /usr/share/kbd/consolefonts/$font
 setfont
+
+Bewegung im Terminal:
+ctrl-Pfeiltasten
+Pfeiltasten
+ctrl-w
+alt-backspace
+ctrl-r / ctrl-g
+ctrl-d
+
+
+Beenden:
+top
+wc
+vim
+ping rzhs056.ofd-h.de
 

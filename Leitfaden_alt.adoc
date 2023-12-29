@@ -1,0 +1,447 @@
+= Einstieg in den Umgang mit der textorientierten Kommandooberfläche unter Linux
+Hallo
+:toc: 
+:toc-title: Inhalt
+
+== Vorwort
+
+In dieser Schulung werden Sie auf den Einstieg in die Arbeit mit der textorientierten Kommandooberfläche unter Linux vorbereitet.
+
+Die Schulungsinhalte beziehen sich auf Anwender, die noch nicht mit der textorientierten Kommandooberfläche unter Linux gearbeitet haben.
+
+Wir wünschen Ihnen eine erkenntnisreiche und reibungslose Schulung und -zu gegebener Zeit- einen erfolgreichen Start auf der Kommandozeile von Linux.
+
+== Erste Schritte
+
+=== Shell
+
+Die Shell (shell = Schale) ist ein Anwendungsprogramm, das Kommandos von der Tastatur einliest, diese interpretiert und ausführt.
+Unter Linux wird standardmäßig die Bash (Bourne Again Shell), geschrieben von Brian Fox und Chet Ramey verwendet.
+
+=== xTerm
+
+EurKEY Layout? Niedersachsenlogo -> Keyboard.
+
+Darkmode? Niedersachsenlogo -> Plasma Style.
+
+Natural scrolling? Niedersachsenlogo -> Mouse -> Invert Scroll direction.
+
+Englisch? `LANG=en_US.UTF-8` in `~/.bashrc`.
+
+Klicken Sie auf das Niedersachsenlogo und geben Sie im Suchfeld den Begriff xterm bzw. konsole ein.
+
+Statt xterm konsole, falls möglich. Schriftgröße und dark mode: Settings -> Manage Profiles.
+
+Es öffnet sich das Terminalprogramm.
+
+Bereits an dieser Stelle erhalten Sie Angaben über den Benutzernamen (hier iuk153) und an (@) welchem Rechner (hier rzha129) der Benutzer angemeldet ist.
+
+Nach dem : folgt die Angabe, in welchem Verzeichnis sich der Benutzer befindet. Nach dem Öffnen eines xTerm-Fensters befindet sich der Benutzer grundsätzlich in seinem eigenen Homeverzeichnis, zu erkennen an der Tilde `~`.
+
+Die Eingabeaufforderung (englisch Prompt) befindet sich rechts neben dem abschließendem Zeichen `>` und "wartet" auf Ihre Kommandoeingabe über die Tastatur.
+
+Aufgabe 1: Schnellstart für das Terminal.
+
+* Schliessen Sie das Terminal mit `ctrl+d`.
+* Öffnen Sie das Terminal erneut.
+* Schliessen Sie das Terminal mit `exit`.
+* Legen Sie ein Widget für das Terminal in der Taskleiste an.
+* Öffnen Sie das Terminal aus der Taskleiste.
+
+Aufgabe 2: histsize erhöhen
+
+* Öffnen Sie das Terminal.
+* Geben Sie `echo HISTSIZE=10000 >>.bashrc` ein.
+
+=== Befehlsstruktur
+
+Die allgemeine Befehlsstruktur stellt sich wie folgt dar:
+
+[cols="1,2"]
+|===
+|Kommando
+|Was wird gemacht?
+
+|Option(en)
+|Wie wird es gemacht?
+
+|Argument(e)
+|Womit wird es gemacht?
+|===
+
+Kommandos werden mit der Tastatur eingegeben und mit der Returntaste abgeschlossen.
+Das Kommando besteht aus dem Befehlsnamen, auf welchen nach einem Leerzeichen zur Abtrennung die Parameter folgen.
+Die Parameter unterteilen sich dabei in Optionen und Argumente.
+
+Optionen sind an einem oder zwei Minuszeichen zu erkennen. Eine Option kann einen eigenen Parameter haben, der dann mit zur Option zählt.
+Eine Option mit einem Minuszeichen nennt man kurze Option, ansonsten lange Option oder Option im GNU-Stil.
+Argumente sind Parameter, die nicht mit einem Minuszeichen beginnen.
+
+Beispiele:
+
+* `ls -lart --color`
+* `rm -i Hallo.txt`
+* `curl --noproxy "*" 'http://rzhs211:3000/'`
+
+== Hilfe zur Selbsthilfe
+
+=== Man-pages und Info-pages
+
+Linux bietet in Form der Manpages eine gute Hilfestellung zu den einzelnen Kommandos.
+Diese können mit dem Kommando `man` oder besser `info` (abgeleitet von dem englischen Wort manual = Handbuch)
+und dem jeweiligen Kommando, getrennt durch ein Leerzeichen aufgerufen werden.
+
+Es kann aber vorkommen, dass es keine man-page oder info-page gibt.
+Beispiele: `man ll`, `man kdialog`, `man .`.
+
+Wenn das so ist, probiert man Folgendes, um Dokumentation zu bekommen:
+
+* `help .` bzw. `info bash .` für bash built-ins.
+* `info bash HISTSIZE` für bash-Variablen.
+* `alias ll` für Aliase.
+* `kdialog --help` für sonstige Kommandos, für die es keine man-page gibt. 
+
+== Navigation in der Verzeichnisstruktur
+
+=== Verzeichnisstruktur
+
+Bei der unzähligen Menge an Dateien und Verzeichnissen ist ein Ordnungsprinzip erforderlich.
+Dateien werden daher in Verzeichnissen gruppiert - ein Verzeichnis stellt sich daher wie ein Aktenordner dar.
+Verzeichnisse können neben Dateien auch weitere Verzeichnisse beinhalten, welche dann als Unterverzeichnisse bezeichnet werden.
+Auch Unterverzeichnisse können wiederum mit Dateien und weiteren Verzeichnissen gefüllt sein.
+
+Somit ergibt sich eine baumartige Verzeichnisstruktur (auch als Verzeichnisbaum bezeichnet).
+Das Hauptverzeichnis, welches bildlich die Wurzel des Baumes darstellt und aus welchem alle weiteren Verzeichnisse hervorgehen,
+wird daher auch als Wurzelverzeichnis (englisch root directory) bezeichnet.
+
+Es gibt vier spezielle Namen:
+
+* Das root directory hat den speziellen Namen `/`.
+* Das aktuelle Verzeichnis hat den Namen `.`.
+* Der parent des aktuellen Verzeichnisses hat den Namen `..`.
+* Das Home-Verzeichnis des aktuellen Benutzers hat den Namen `~`.
+
+Der Befehl `ls -l` zeigt unter anderem den Typ (Verzeichnis oder Datei) eines Objekts an.
+
+====
+Alle Dateisysteme befinden sich unter dem Wurzelverzeichnis `/`. Es gibt keine Laufwerksbuchstaben wie in Windows.
+====
+
+=== Navigation
+
+==== Verzeichnisabfrage mit pwd
+
+Mit dem Kommando `pwd` (englisch: print working directory) können Sie sich den Pfadnamen des aktuellen Verzeichnis anzeigen lassen.
+
+==== Inhalts eines Verzeichnis anzeigen lassen mit ls
+
+Um sich den Inhalt eines Verzeichnis anzeigen zu lassen, verwenden Sie das Kommando ls (englisch: list).
+Das Kommando listet die Namen aller sichtbarer Dateien und Verzeichnisse auf.
+
+Beispiel:
+
+[,bash]
+----
+iuk153@rzha129:~/dokument/linux_nwp> ls
+Anleitungen Linux.txt Unterlagen
+----
+
+In dem Verzeichnis linux_nwp befinden sich die Unterverzeichnisse Anleitungen und Unterlagen (blau eingefärbt) und die Datei Linux.txt (schwarz eingefärbt).
+
+Dem Kommando ls können verschiedene Optionen mitgegeben werden.
+Alle Optionen können Sie bei Bedarf der manpage zu ls entnehmen.
+In dieser Schulung wird auf einige hilfreiche und wichtige Optionen näher eingegangen.
+
+* zusätzliche Informationen anzeigen mit der Option `-l` ("long")
+* versteckte Dateien anzeigen mit der Option `-a` ("all")
+* Sortierung nach Zeit (neueste zuerst) mit `-t` ("time")
+* Sortierreihenfolge umkehren mit `-r` ("reverse")
+* Neben Optionen nimmt `ls` optional auch ein Argument (Pfadname).
+
+Aufgabe:
+
+* Geben Sie das Kommando `ll` ein.
+* Fragen Sie mit `alias ll` die Definition des alias `ll` ab.
+* Ändern Sie die Definition des Alias mit `alias ll='ls -lart --color'`.
+* Testen Sie Ihre Definition mit `ll`.
+* Schliessen Die das Terminal mit `exit` oder `ctrl+d`.
+* Öffnen Sie das Terminal erneut.
+* Fragen Sie erneut die Definition des Alias `ll` ab, indem Sie die Pfeil-nach-Oben Taste drücken.
+* Öffnen sie die Datei `.bashrc` im Home-Verzeichnis.
+* Tragen Sie die Zeile `alias ll='ls -lart --color'` ein.
+* Speichern und schliessen Sie die `.bashrc`.
+* Schliessen Sie das Terminal und öffnen Sie es erneut.
+* Fragen Sie die Definition des Alias `ll` ab, indem Sie die Pfeil-nach-Oben Taste drücken.
+
+Die Ausgabe von Kommandos wie `ls` kann länger sein, als in ein Terminalfenster passt.
+In diesem Fall kann man die Ausgabe in einem pager wie `less` betrachten, oder in eine Datei umleiten:
+
+* `ll | less`
+* `ll >ausgabe.txt`
+
+==== In ein Verzeichnis wechseln mit cd
+
+Im Terminal gibt es ein aktuelles Verzeichnis.
+Dieses sehen Sie in der Eingabeaufforderung.
+Den Wert des aktuellen Verzeichnisses können Sie mit `pwd` einsehen.
+Mit dem Kommando `cd` (englisch: change directory) wechseln Sie ein anderes Verzeichnis.
+Nach Eingabe des Kommandos muss der Name des Unterverzeichnis, in welches gewechselt werden soll, mit angegeben werden.
+Wenn kein Unterverzeichnis angegeben wird, wechselt `cd` in Ihr Home-Verzeichnis `~`.
+`cd -` wechselt in das vorherige Verzeichnis.
+
+Ein Pfadname der mit `/` beginnt wird als absoluter Pfad bezeichnet.
+Ansonsten handelt es sich um einen relativen Pfad.
+
+Tipp: Um beim Eintippen des Verzeichnisnamens Tippfehler zu vermeiden,
+können Sie mit der Tabulator-Taste als Befehlszeilenergänzung sich den Verzeichnisnamen vervollständigen lassen.
+Das spart Tipparbeit und vermeidet Schreibfehler, die bei Befehlseingabe ins Leere führen.
+
+Aufgabe:
+
+* Wechseln Sie in das Verzeichnis `Downloads`. Verwenden Sie dabei die Tabulatortaste.
+* Geben Sie die Inhalte des aktuellen Verzeichnisses aus.
+* Geben Sie den kompletten Pfad des aktuellen Verzeichnisses aus.
+* Wechseln Sie in das Wurzelverzeichnis (root).
+* Geben Sie die Inhalte des Wurzelverzeichnis aus.
+* Wechseln Sie zurück in das vorherige Verzeichnis.
+* Wechseln Sie in das parent-Verzeichnis des aktuellen Verzeichnisses.
+* Wechseln Sie in das tmp-Verzeichnis `/tmp`.
+* Wechseln Sie in das Home-Verzeichnis.
+
+=== Verlinkung
+
+==== Erzeugen eines Hardlinks mit ln
+
+Mit dem Kommando `ln` erzeugen Sie einen sogenannten Hardlink.
+Hierbei handelt es sich um einen weiteren Verzeichniseintrag für eine bereits vorhandene Datei. 
+
+Syntax:
+
+* `ln Datei Linkname`
+
+Beispiel:
+
+[,bash]
+----
+iuk153@rzha129:~/dokument/linux_nwp/Unterlagen/Vorlagen> ln Datei Datei_Hardlink
+iuk153@rzha129:~/dokument/linux_nwp/Unterlagen/Vorlagen> ls -l
+-rw-r----- 2 iuk153 anwprog 0 29. Okt 12:43 Datei
+-rw-r----- 2 iuk153 anwprog 0 29. Okt 12:43 Datei_Hardlink
+iuk153@rzha129:~/dokument/linux_nwp/Unterlagen/Vorlagen> ls -i
+93303710 Datei  93303710 Datei_Hardlink
+iuk153@rzha129:~/dokument/linux_nwp/Unterlagen/Vorlagen> ls -l
+----
+
+Einschränkungen:
+
+* Ein hardlink kann nicht auf ein Verzeichnis zeigen.
+* Der hardlink kann nicht auf eine Datei in einem anderen Dateisystem zeigen.
+
+==== Erzeugen eines symbolischen Links
+
+Mit dem Befehl `ln -s` erzeugen Sie einen symbolischen Link, auch Softlink genannt.
+Ein Softlink ist als eine Art Zeiger zu verstehen, der bei Aufruf über den hinterlegten Link an die richtige Stelle weiterleitet.
+
+Syntax:
+
+* `ln -s Datei Linkname`
+* `ln -s Datei`
+
+=== Verzeichnisse und leere Dateien anlegen
+
+==== Verzeichnisse anlegen mit mkdir
+
+Ein Verzeichnis legen Sie mit dem Kommando `mkdir` (englisch: make directory) und dem neuen Verzeichnisnamen an.
+
+Syntax:
+
+* `mkdir Verzeichnisname`
+* `mkdir -p mehrere/geschachtelte/Verzeichnisname`
+
+==== Leere Dateien anlegen mit touch
+
+Eine leere Datei können Sie mit dem Kommando `touch` (übersetzt: berühren) und dem neuen Dateinamen anlegen.
+Die so angelegte Datei ist leer und hat somit eine Größe von 0 Byte.
+Die Möglichkeit, Dateien mit `touch` anzulegen, ist z.B. für das Anlegen von Protokolldateien wichtig.
+
+Syntax:
+
+* `touch Dateiname`
+
+====
+Das Kommando touch aktualisiert die Zugriffszeit einer Datei auf den jetzigen Zeitpunkt.
+Das bedeutet, dass ein touch auf eine bereits existierende Datei deren Zugriffszeitpunkt ändert.
+====
+
+Aufgaben:
+
+* Legen Sie mit `touch` eine Datei namens "Linux Kurs.txt" an.
+
+=== Dateinamen unter Linux
+
+==== Besonderheiten bei der Namensvergabe
+
+Grundsätzlich können Sie den Dateinamen frei gestalten.
+Ein paar Besonderheiten sind aber zu beachten:
+
+* Linux unterscheidet streng zwischen Groß- und Kleinschreibung. Anders als bei Windows sind `Datei.txt` und `datei.txt` zwei eigenständige Dateien.
+* Ein `.` vor den Dateinamen "versteckt" diese. Diese Eigenschaft wird z.B. verwendet für Dateien, die Voreinstelllungen für Programme enthalten um die Dateinamenslisten für den Benutzer nicht unnötig unübersichtlich werden zu lassen.
+* Ein Dateiname darf keine `/` enthalten, da dieser als Verzeichnistrenner interpretiert wird.
+* Zeichen mit Sonderbedeutung wie das Leerzeichen (dient als Trennzeichen) und die Zeichen `$&;(){}[]*?!<>` müssen, wenn sie verwendet werden sollen, maskiert werden, da die Shell diese ansonsten interpretiert. Ein einzelnes Sonderzeichen kann mit `\` maskiert werden. Ansonsten können einzelne Anführungsstriche verwendet werden.
+* Umlaute können im Dateinamen später auch zu Problemen führen.
+
+====
+Verwenden Sie möglichst keine Umlaute oder Leerzeichen in Dateinamen.
+
+Sie erleichtern Ihren Kollegen so die Arbeit.
+====
+
+====
+Eine Dateiendung ist in Linux optional. Für ausführbare Dateien ist es üblich, keine Dateiendung zu verwenden.
+
+Beispiel: `/usr/bin/ls`
+====
+
+==== Übung zu Dateinamen
+
+Sind die folgenden Dateinamen zulässig oder wenn nein, warum nicht?
+
+* Max-Muster
+* ?was
+* .menue
+* bla.txt.blubb
+* 24.Dezember
+* 1/8-Liter
+* Müll
+* Linux_ist_toll
+
+=== Dateien kopieren und verschieben
+
+==== Dateien kopieren mit cp
+
+Mit dem Kommando `cp` (engl. copy) kopieren Sie Dateien an genau ein Ziel.
+Soll das Ziel das aktuelle Verzeichnis sein, so kann dieses mit `.` angegeben werden.
+
+Syntax:
+
+* `cp Datei Ziel`
+* `cp -r Ordner Ziel`
+
+Um ein Verzeichnis zu kopieren, muss die `-r` Option mit angegeben werden.
+
+Aufgabe:
+
+* Legen Sie ein Verzeichnis `Aktenordner` an.
+* Legen Sie eine Datei `Aktenordner/Steuererklaerung.txt` an.
+* Legen Sie eine Kopie des Ordners `Aktenordner` an. Die Kopie soll `Aktenordner_Kopie` heissen.
+
+==== Dateien umbenennen / verschieben mit mv
+
+Mit dem Kommando mv (engl. move) können Sie Dateien und Ordner umbenennen oder verschieben.
+
+Syntax:
+
+* `mv Quelle Ziel`
+
+====
+Um einen Ordner zu verschieben, ist kein `-r` nötig.
+
+Um Ordner oder Dateien "umzukopieren" ist `mv` viel effizienter als `cp`.
+Allerdings nur, wenn Quelle und Ziel auf demselben Laufwerk liegen.
+====
+
+Aufgabe:
+
+* Benennen Sie die Datei "Linux Kurs.txt" in "LinuxKurs.txt" um.
+
+=== Verzeichnisse und Dateien löschen
+
+==== Dateien löschen mit rm
+
+Mit dem Kommando rm (engl. remove) können Sie Dateien löschen.
+
+Syntax:
+
+* `rm Datei`
+* `rm -rf Ordner`
+
+====
+Das Kommando rm löscht unwiderruflich, es gibt keinen "Papierkorb".
+====
+
+Um "auf Nummer sicher" zu gehen, empfiehlt es sich, die Option `-i` zu verwenden.
+In diesem Fall fragt `rm` bei jeder einzelnen Datei nach, ob diese gelöscht werden soll.
+
+Möchten Sie rekursiv löschen, verwenden Sie die Option `-r`.
+In diesem Fall löscht `rm` rekursiv den gesamten Verzeichnisbaum mit allen enthaltenen Dateien und Verzeichnissen.
+
+==== Verzeichnisse löschen mit rmdir
+
+Mit dem Kommando rmdir (engl. remove directory) können Sie Verzeichnisse löschen.
+Allerdings löscht rmdir nur leere und nicht verwendete Verzeichnisse.
+
+Syntax:
+
+* `rmdir Verzeichnis`
+
+====
+`rmdir` kann nur leere Verzeichnisse löschen. Dies ist ein Sicherheitsfeature.
+
+Um ein nichtleeres Verzeichnis zu löschen, muss `rm -r` verwendet werden.
+====
+
+=== Übung zu Dateien und Verzeichnissen
+
+* Legen Sie in dem Verzeichnis `dokument` ein neues Verzeichnis `Uebungen` an.
+* Legen Sie in dem soeben angelegten Verzeichnis `Uebungen` ein weiteres Verzeichnis `erster_Tag` an.
+* Erstellen Sie in dem Verzeichnis `dokument/Uebungen` die Dateien `Brief1`, `Brief2` und `Brief3`.
+* Lassen Sie sich den Inhalt des Verzeichnis `dokument/Uebungen` auflisten.
+* Verschieben Sie die Dateien `Brief1`, `Brief2` und `Brief3` in das Verzeichnis `erster_Tag`.
+* Erzeugen Sie mit `Brief1` einen Hardlink `Brief4`.
+* Löschen Sie die Dateien `Brief1` und `Brief2`.
+* Löschen Sie das Verzeichnis `erster_Tag`.
+
+=== Inhalt von Dateien anzeigen
+
+==== Anzeige von Dateien mit less
+
+Mit dem Kommando `less` können Sie den Inhalt einer Datei auf der Kommandozeile einsehen.
+Less ist eine freie Variante des Unix-Befehls `more`.
+Solche Kommandos werden als "Pager" bezeichnet, weil sie es erlauben, seitenweise vor und zurück zu blättern.
+
+Syntax:
+
+* `less Dateiname`
+* `Befehl | less`
+
+Wird die Datei angezeigt, so befindet sich less in einem interaktiven Modus und wird mit Hilfe von Tasteneingaben gesteuert.
+Mit den Pfeiltasten oder RETURN / `y` navigieren Sie zeilenweise, mit den Bildtasten oder der Leertaste / `b` seitenweise durch den Dateiinhalt.
+
+Eine mit less angezeigte Datei kann mit `/` auch nach Schlagworten durchsucht werden.
+
+Mit `n` (next) wird die Suche wiederholt. Mit `Shift-n` rückwärts.
+
+Zum Beenden der Dateianzeige drücken Sie q (quit).
+
+====
+Mit less können auch sehr große Dateien angezeigt werden, z.B. mehrere GB.
+====
+
+==== Inhalt einer Datei ausgeben mit cat
+
+Eine weitere Möglichkeit sich den Inhalt einer Datei anzeigen zu lassen haben Sie mit dem Kommando `cat` (englisch: concatenate).
+
+Syntax:
+
+* `cat Datei`
+* `cat -v Datei`
+
+Mit der `-v` Option werden auch nichtdruckbare Zeichen ausgegeben.
+Dies kann hilfreich sein, um Probleme mit Zeilenendungen zu finden.
+
+====
+Linux benutzt ein anderes Zeilenumbruch-Zeichen als Windows.
+Dies kann zu verschiedenen Problemen führen, wenn Dateien von einem Windowsrechner auf einen Linuxrechner kopiert werden.
+====
+
+

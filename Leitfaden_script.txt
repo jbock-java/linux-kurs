@@ -1,0 +1,27 @@
+= Shellscripting
+Hallo
+:toc: 
+:toc-title: Inhalt
+
+== Vorwort
+
+=== Bash-Scripte
+
+* Enthalten eine Folge von Befehlen.
+* Alles was man in der Kommandozeile machen kann, kann man auch in dem script machen.
+
+Beispiel:
+
+[,bash]
+----
+#!/bin/bash
+echo "Ich liebe Shellscripting!"
+----
+
+Dieses script kann wie folgt ausgeführt werden:
+
+....
+$ chmod u+x hello
+$ ./hello
+Ich liebe Shellscripting!
+....
