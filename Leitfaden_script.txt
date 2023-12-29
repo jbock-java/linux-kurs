@@ -21,7 +21,140 @@ echo "Ich liebe Shellscripting!"
 Dieses script kann wie folgt ausgeführt werden:
 
 ....
-$ chmod u+x hello
-$ ./hello
+$ chmod u+x hallo
+$ ./hallo
 Ich liebe Shellscripting!
 ....
+
+Die ersten zwei Buchstaben in der ersten Zeile nennt man "shebang".
+
+[,bash]
+----
+#!/bin/bash
+sleep 90
+----
+
+....
+$ ./schlafen &
+[1] 25330
+$ ps -fp 25330
+UID        PID  PPID  C STIME TTY          TIME CMD
+iuk547   25330  8969  0 13:48 pts/2    00:00:00 /bin/bash ./schlafen
+$ ps -ef | fgrep 25330 | fgrep -v grep
+iuk547   25725  8969  0 13:50 pts/2    00:00:00 /bin/bash ./schlafen
+iuk547   25728 25725  0 13:50 pts/2    00:00:00 sleep 90
+$ pstree -p 25725
+schlafen(25725)───sleep(25728)
+....
+
+=== Variablen
+
+* Benannte Speicherplätze
+* Name-Wert Paare
+* Syntax: `FOO="Wert"` oder `declare FOO="Wert"`
+* Groß- und Kleinschreibung sind wichtig.
+* Namenskonvention: Variablennamen komplett in Großbuchstaben.
+
+Variablennutzung:
+
+[,bash]
+----
+#!/bin/bash
+MEINE_SHELL="bash"
+echo "Ich liebe die $MEINE_SHELL shell."
+----
+
+Oder:
+
+[,bash]
+----
+#!/bin/bash
+MEINE_SHELL="bash"
+echo "Ich liebe die ${MEINE_SHELL} shell."
+----
+
+Die geschweiften Klammern sind nützlich, um den Variablennamen von umgebendem Text abzugrenzen:
+
+[,bash]
+----
+#!/bin/bash
+MEINE_SHELL="bash"
+echo "Ich ${MEINE_SHELL}e auf meiner Tastatur."
+----
+
+Ausgabe:
+
+....
+Ich bashe auf meiner Tastatur.
+....
+
+
+Ohne die geschweiften Klammern würde es nicht funktionieren:
+
+[,bash]
+----
+#!/bin/bash
+MEINE_SHELL="bash"
+echo "Ich $MEINE_SHELLe auf meiner Tastatur."
+----
+
+Ausgabe:
+
+....
+Ich  auf meiner Tastatur.
+....
+
+=== Den Output eines Kommandos einer Variablen zuweisen
+
+[,bash]
+----
+#!/bin/bash
+SERVER_NAME=$(hostname)
+echo "Dieses script läuft auf ${SERVER_NAME}."
+----
+
+Das funktioniert auch mit "Backticks":
+
+[,bash]
+----
+#!/bin/bash
+SERVER_NAME=`hostname`
+echo "Dieses script läuft auf ${SERVER_NAME}."
+----
+
+=== Tests
+
+Syntax:
+
+* `[ zu_pruefende_bedingung ]`
+
+Beispiel:
+
+* `[ -e /etc/passwd ]`
+
+Datei Operatoren (tests):
+
+[cols="1,4"]
+|===
+|`-d DATEI`
+|Testet ob die Datei ein Verzeichnis ist.
+
+|`-e DATEI`
+|Testet ob die Datei existiert.
+
+|`-f DATEI`
+|Testet ob die Datei existiert und eine reguläre Datei ist.
+
+|`-r DATEI`
+|Testet ob die Datei vom aktuellen Benutzer gelesen werden kann.
+
+|`-s DATEI`
+|Testet ob die Datei existiert und nicht leer ist.
+
+|`-w DATEI`
+|Testet ob die Datei vom aktuellen Benutzer geschrieben werden kann.
+
+|`-x DATEI`
+|Testet ob die Datei vom aktuellen Benutzer ausgeführt werden kann.
+|===
+
