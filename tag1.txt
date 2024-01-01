@@ -18,4 +18,9 @@ top
 wc
 vim
 ping rzhs056.ofd-h.de
-
+ed
+sed
+bash
+screen
+python
+ssh

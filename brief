@@ -1,0 +1,6 @@
+#!/bin/bash
+cat << EOF
+Hallo ${A}
+Alles Gute zum ${B}. Geburtstag.
+EOF
+
