@@ -64,3 +64,6 @@ which
 $PATH
 xrandr
 less
+tr
+paste
+
