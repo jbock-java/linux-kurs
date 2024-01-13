@@ -70,6 +70,27 @@ xargs
 tee
 
 
+tty
+who
+w
+uptime
+whoami
+logname
+id
+groups
+last
+last reboot
+lastb
+lastlog
+uname
+uname -a
+uname -s
+uname -n
+uname -r
+uname -v
+uname -p
+uname -o
+
 Aufgaben:
 LANG=C
 search engine auf Englisch stellen
