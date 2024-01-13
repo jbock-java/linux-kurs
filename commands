@@ -66,4 +66,16 @@ xrandr
 less
 tr
 paste
+xargs
+tee
+
+
+Aufgaben:
+LANG=C
+search engine auf Englisch stellen
+Pausenscript
+Teilnehmer Umsetzungsplan
+IFS anzeigen
+Namensliste umdrehen (awk?)
+Zufallszahl anzeigen (zufaelligen Teilnehmer auswaehlen)
 
